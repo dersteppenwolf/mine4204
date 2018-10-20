@@ -28,18 +28,23 @@ public class NoobChain {
 		
 		int iterations = 10;
 			
-		int difficulty = 3;
+		int minDifficulty = 2;
+		int maxDifficulty = 8;
 		
 		List<String> results = new ArrayList<String>();
 		
-		for (int i = 0; i < iterations; i++) {
-			long startTime = System.nanoTime();
-			computeBlockchain(difficulty);
-			long endTime = System.nanoTime();
-			long duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
-			long durationInMilis = duration / 1000000;
-			results.add(String.format("difficulty=%s;iteration=%s;%s", difficulty, i , durationInMilis)   );
+		for (int difficulty = minDifficulty; difficulty < maxDifficulty; difficulty++) {
+			for (int i = 0; i < iterations; i++) {
+				long startTime = System.nanoTime();
+				computeBlockchain(difficulty);
+				long endTime = System.nanoTime();
+				long duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
+				long durationInMilis = duration / 1000000;
+				results.add(String.format("difficulty=%s;iteration=%s;%s", difficulty, i , durationInMilis)   );
+			}
 		}
+		
+		
 		
 		for (String r : results) {
 			System.out.println(r);
