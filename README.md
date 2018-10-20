@@ -4,7 +4,11 @@
 ## Laboratorio – BlockChain
 
 
-Siga el tutorial “Creating your first blockchain with Java.” Partes 1 y 2: https://medium.com/programmers-blockchain/create-simple-blockchain-java-tutorial-from-scratch- 6eeed3cb03fa https://medium.com/programmers-blockchain/creating-your-first-blockchain-with-java-part-2-transactions- 2cdac335e0ce
+Siga el tutorial “Creating your first blockchain with Java.” Partes 1 y 2: 
+
+https://medium.com/programmers-blockchain/create-simple-blockchain-java-tutorial-from-scratch-6eeed3cb03fa  
+
+https://medium.com/programmers-blockchain/creating-your-first-blockchain-with-java-part-2-transactions-2cdac335e0ce
 
 Tenga en cuenta:
 - Este programa permite crear una aproximación de una aplicación basada en BlockChain. Sin
@@ -23,9 +27,13 @@ necesario revisar las entradas. Explique más detalladamente el significado de 
 - Cree una tabla que muestre el cambio en el número de intentos y tiempo necesario para minar
 usando las siguientes dificultades: 2, 3, 4, 5, 6, 7. Adicionalmente cree una gráfica que ilustre los incrementos.
 Page 1 of 2
+
+
 Entrega:
 Cada grupo debe adicionar la siguiente línea al comienzo del archivo Java principal: 
-/*
-* Codigo de Programmers BlockChain (https://medium.com/programmers-blockchain) * Modificado por: <nombres de todos los integrantes del grupo>
-*/
+
+    /*
+    * Codigo de Programmers BlockChain (https://medium.com/programmers-blockchain) * Modificado por: <nombres de todos los integrantes del grupo>
+    */
+    
 Y entregar un zip del proyecto Java completo (incluyendo el directorio doc con el informe) en SICUA+, de acuerdo con las condiciones establecidas.
