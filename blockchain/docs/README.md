@@ -17,12 +17,23 @@ Se creó proyecto Maven para la compilación del proyecto
 
 **Respuesta:**
 
+El algoritmo utilizado es el *ECDSA* (Elliptic Curve Digital Signature Algorithm) el cual utiliza *elliptic curve cryptography*.
+
+https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm
+http://www.bouncycastle.org/wiki/display/JA1/Elliptic+Curve+Key+Pair+Generation+and+Key+Factories
+
 
 
 ## 2
 ¿Qué algoritmo usa el programa para firmar una transacción? ¿Cuál es la diferencia con el algoritmo mencionado en el punto anterior?
 
 **Respuesta:**
+
+Se utilza el algoritmo *SHA-2 (Secure Hash Algorithm 2)*. Este algoritmo a diferencia del primero es de tipo hashing.
+
+https://www.baeldung.com/sha-256-hashing-java
+https://en.wikipedia.org/wiki/SHA-2
+
 
 ## 3
 
