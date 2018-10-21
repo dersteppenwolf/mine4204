@@ -14,7 +14,7 @@ Semestre 2018-2
 
 **Código**
 
-Código fuente: [/blockchain](../blob/master/blockchain)
+Código fuente: [/blockchain](../master/blockchain)
 
 
 **Preparación:**
