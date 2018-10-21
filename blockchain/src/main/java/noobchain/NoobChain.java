@@ -9,7 +9,6 @@ import java.security.Security;
 import java.util.ArrayList;
 //import java.util.Base64;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 public class NoobChain {
@@ -20,14 +19,12 @@ public class NoobChain {
 	public static float minimumTransaction = 0.1f;
 
 
-
 	public static void main(String[] args) {
 		// add our blocks to the blockchain ArrayList:
 		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider()); // Setup Bouncey castle as a
 																				// Security Provider
 		
-		int iterations = 10;
-			
+		int iterations = 10;	
 		int minDifficulty = 2;
 		int maxDifficulty = 8;
 		
@@ -44,14 +41,10 @@ public class NoobChain {
 			}
 		}
 		
-		
-		
 		for (String r : results) {
 			System.out.println(r);
 		}
-		
-		
-		
+
 	}
 	
 	
@@ -59,8 +52,6 @@ public class NoobChain {
 		UTXOs = new HashMap<String, TransactionOutput>();
 		
 		ArrayList<Block> blockchain = new ArrayList<Block>();
-		
-		
 		
 		// Create wallets:
 		Wallet walletA = new Wallet();

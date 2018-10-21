@@ -1,15 +1,35 @@
-# Solución
+# MINE 4204 - Laboratorio – BlockChain
 
-Por:	 	
+Departamento de Ingeniería de Sistemas y Computación 
+
+Curso: MINE 4204 Información, Seguridad y Privacidad
+
+Semestre 2018-2
+
+- [MINE 4204 - Laboratorio – BlockChain](#mine-4204---laboratorio-%E2%80%93-blockchain)
+    - [Autores](#autores)
+    - [0](#0)
+    - [1](#1)
+    - [2](#2)
+    - [3](#3)
+    - [4](#4)
+    - [5](#5)
+
+
+
+## Autores 	 	
     
     Marly Piedrahita (mj.piedrahita)
     Juan Méndez (jc.mendez)
+
+    
+
 
 ## 0
 
 **Preparación:** 
 
-Se creó proyecto Maven para la compilación del proyecto
+Se creó proyecto Maven para facilitar la compilación y ejecución  del proyecto
 
 
 ## 1
@@ -53,3 +73,12 @@ Adicione una transacción nueva: el usuario A envía al usuario C, 20 coins. V
 
 ## 5
 Cree una tabla que muestre el cambio en el número de intentos y tiempo necesario para minar usando las siguientes dificultades: 2, 3, 4, 5, 6, 7. Adicionalmente cree una gráfica que ilustre los incrementos.
+
+**Respuesta:**
+
+Se creó un programa que realiza el proceso para las dificultades 2, 3, 4, 5, 6, 7 donde en cada caso se ejecutan 10 iteraciones.
+
+![Ejecución](program.png)
+
+
+
