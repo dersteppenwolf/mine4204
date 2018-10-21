@@ -12,9 +12,9 @@ Semestre 2018-2
 
 ## Laboratorio – BlockChain
 
-**Código**
+**Resultados**
 
-Código fuente: [/blockchain](../master/blockchain)
+Código Fuente: [/blockchain](../master/blockchain)
 
 
 **Preparación:**
