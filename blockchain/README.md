@@ -68,9 +68,9 @@ Adicione una transacción nueva: el usuario A envía al usuario C, 20 coins. V
 
 **Respuesta:**
 
-![Código](code.png)
+![Código](docs/code.png)
 
-![Ejecución](transaction.png)
+![Ejecución](docs/transaction.png)
 
 
 ## 5
@@ -80,21 +80,21 @@ Cree una tabla que muestre el cambio en el número de intentos y tiempo necesar
 
 Inicialmente se creó un programa que realizaba el proceso para las dificultades 2, 3, 4, 5, 6, 7 donde en cada caso se ejecutan 10 iteraciones pero el programa tomó demasiado tiempo y nunca terminó.
 
-![Ejecución](program.png)
+![Ejecución](docs/program.png)
 
 Se ejecutó una sola iteración teniendo los siguientes resultados:
 
 Tabla:
 
-![Ejecución](table.png)
+![Ejecución](docs/table.png)
 
 Escala Lineal:
 
-![Ejecución](chart.png)
+![Ejecución](docs/chart.png)
 
 Escala Logarítmica:
 
-![Ejecución](chart.png)
+![Ejecución](docs/chart_log.png)
 
 
 
