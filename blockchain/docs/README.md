@@ -22,7 +22,9 @@ Semestre 2018-2
     Marly Piedrahita (mj.piedrahita)
     Juan Méndez (jc.mendez)
 
-    
+Source Code:
+
+    https://github.com/dersteppenwolf/mine4204
 
 
 ## 0
@@ -82,9 +84,19 @@ Inicialmente se creó un programa que realizaba el proceso para las dificultades
 
 Se ejecutó una sola iteración teniendo los siguientes resultados:
 
-![Ejecución](chart.png)
+Tabla:
 
 ![Ejecución](table.png)
+
+Escala Lineal:
+
+![Ejecución](chart.png)
+
+Escala Logarítmica:
+
+![Ejecución](chart.png)
+
+
 
 
 

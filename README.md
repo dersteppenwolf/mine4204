@@ -1,7 +1,21 @@
 # MINE 4204 – Información, Seguridad y Privacidad
 
+    
+Uniandes Departamento de Ingeniería de Sistemas y Computación 
+
+Curso: MINE 4204 Información, Seguridad y Privacidad
+
+Semestre 2018-2
+
+    Marly Piedrahita (mj.piedrahita)
+    Juan Méndez (jc.mendez)
 
 ## Laboratorio – BlockChain
+
+**Código**
+
+Código fuente: [/blockchain](../blob/master/blockchain)
+
 
 **Preparación:**
 
