@@ -24,13 +24,15 @@ public class NoobChain {
 		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider()); // Setup Bouncey castle as a
 																				// Security Provider
 		
-		int iterations = 10;	
+		int iterations = 1;	
 		int minDifficulty = 2;
 		int maxDifficulty = 8;
 		
 		List<String> results = new ArrayList<String>();
 		
 		for (int difficulty = minDifficulty; difficulty < maxDifficulty; difficulty++) {
+			System.out.println("******************************");
+			System.out.println("** difficulty : "+difficulty);
 			for (int i = 0; i < iterations; i++) {
 				long startTime = System.nanoTime();
 				computeBlockchain(difficulty);

@@ -76,9 +76,17 @@ Cree una tabla que muestre el cambio en el número de intentos y tiempo necesar
 
 **Respuesta:**
 
-Se creó un programa que realiza el proceso para las dificultades 2, 3, 4, 5, 6, 7 donde en cada caso se ejecutan 10 iteraciones.
+Inicialmente se creó un programa que realizaba el proceso para las dificultades 2, 3, 4, 5, 6, 7 donde en cada caso se ejecutan 10 iteraciones pero el programa tomó demasiado tiempo y nunca terminó.
 
 ![Ejecución](program.png)
+
+Se ejecutó una sola iteración teniendo los siguientes resultados:
+
+![Ejecución](chart.png)
+
+![Ejecución](table.png)
+
+
 
 
 
