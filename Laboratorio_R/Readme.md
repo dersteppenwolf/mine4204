@@ -36,6 +36,5 @@ Tenga en cuenta que usted debe desarrollar las funciones (p.e. no use las funcio
 
 ## Related Info
 
-Tutorials
-
-https://www.datacamp.com/community/tutorials/r-data-import-tutorial
+* R support for Visual Studio Code https://marketplace.visualstudio.com/items?itemName=Ikuyadeu.r
+* R data import https://www.datacamp.com/community/tutorials/r-data-import-tutorial

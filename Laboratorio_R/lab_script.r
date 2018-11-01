@@ -1,16 +1,8 @@
 rm(list=ls())
 
-clc <- function() cat(rep("\n", 50))
-
-#clc()
-
-#' add(10,1) 
-add <- function (x, y){
-  x + y
-} 
-
-print(add(3,4))
-# print(add(9,90))
+######################################
+# set path 
+######################################
 print("**************************")
 print(getwd())
 # print(regexpr( getwd(), "Laboratorio_R"   )  )
@@ -21,6 +13,9 @@ if ( !regexpr( getwd(), "Laboratorio_R"   )    ) {
   print(getwd())
 }
 
+######################################
+# functions for lab
+######################################
 getMaxValueFromColumn <- function (index ) {
   print("**************************")
   print(" getMaxValueFromColumn   *")
@@ -72,10 +67,17 @@ getAverageValueFromColumn <- function (index ) {
   averageValue
 }
 
+######################################
+# read data
+######################################
 df <- read.table("datos.txt",  header = TRUE)
 print(df)
 
-getMaxValueFromColumn(2)
+######################################
+# test
+######################################
+
+
 maxValue <- getMaxValueFromColumn(2)
 print(paste("maxValue: ", maxValue ))
 maxValue <- getMaxValueFromColumn(4)
