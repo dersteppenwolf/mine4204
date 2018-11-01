@@ -84,38 +84,83 @@ getIndexOfColumnWithMaxAverageValue <- function (df ) {
   indexOfMaxAverage
 }
 
+# índice de la fila con el valor más alto en un campo particular 
+# (recibe el índice del campo/ columna que se quiere revisar)
+# retorna un vector con todos los índices de las filas que obtuvieron el máximo valor
+getIndexOfRowsWithMaxValueInColumn <- function (columnIdx, df  ){
+  print("**************************")
+  print(paste(" getIndexOfRowsWithMaxValueInColumn   columnIdx: ", columnIdx ))
+  column <- df[,columnIdx]
+  maxValue <- .Machine$double.xmin
+  rowIdx = 0
+  rowsWithMaxValue  <- c()
+  for(i in column){
+    rowIdx = rowIdx + 1
+    if (i>maxValue){
+      maxValue = i
+      rowsWithMaxValue <- c(rowIdx)    
+      #print(paste(" val    ", i, " : ",  rowIdx  ))
+    }else if (  i ==  maxValue ){
+      rowsWithMaxValue <- c(rowsWithMaxValue, rowIdx)
+      #print(paste(" val    ", i, " : ",  rowIdx  ))
+      #print(rowsWithMaxValue)
+    }
+  }
+  print("**************************")
+  rowsWithMaxValue
+}
+
+
 ######################################
 # read data
 ######################################
+print("**************************")
 data <- read.table("datos.txt",  header = TRUE)
 print(data )
+print("**************************")
+dataColumnsWithoutId = data[, 2 : length(data)  ]
+print( dataColumnsWithoutId )
+print("**************************")
 
 ######################################
 # test
 ######################################
 
 
-maxValue <- getMaxValueFromColumn(2, data)
+maxValue <- getMaxValueFromColumn(2, dataColumnsWithoutId)
 print(paste("maxValue: ", maxValue ))
-maxValue <- getMaxValueFromColumn(4, data)
+maxValue <- getMaxValueFromColumn(4, dataColumnsWithoutId)
 print(paste("maxValue: ", maxValue ))
 
-minValue <- getMinValueFromColumn(2, data)
+minValue <- getMinValueFromColumn(2, dataColumnsWithoutId)
 print(paste("minValue: ", minValue ))
-minValue <- getMinValueFromColumn(4, data)
+minValue <- getMinValueFromColumn(4, dataColumnsWithoutId)
 print(paste("minValue: ", minValue ))
 
-averageValue <- getAverageValueFromColumn(2, data)
+averageValue <- getAverageValueFromColumn(2, dataColumnsWithoutId)
 print(paste("averageValue: ", averageValue ))
-averageValue <- getAverageValueFromColumn(4, data)
+averageValue <- getAverageValueFromColumn(4, dataColumnsWithoutId)
 print(paste("averageValue: ", averageValue ))
 
 
-dataColumnsWithoutId = data[, 2 : length(data)  ]
-print( dataColumnsWithoutId )
+
 
 indexOfMaxAverage<- getIndexOfColumnWithMaxAverageValue(dataColumnsWithoutId)
 print(paste("indexOfMaxAverage: ", indexOfMaxAverage ))
+
+
+
+rowIdx <- getIndexOfRowsWithMaxValueInColumn(1, dataColumnsWithoutId)
+print("rows with max value: ")
+print(rowIdx )
+
+rowIdx <- getIndexOfRowsWithMaxValueInColumn(5, dataColumnsWithoutId)
+print("rows with max value: ")
+print(rowIdx )
+
+rowIdx <- getIndexOfRowsWithMaxValueInColumn(7, dataColumnsWithoutId)
+print("rows with max value: ")
+print(rowIdx )
 
 
 
