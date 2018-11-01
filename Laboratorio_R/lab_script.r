@@ -16,7 +16,7 @@ if ( !regexpr( getwd(), "Laboratorio_R"   )    ) {
 ######################################
 # functions for lab
 ######################################
-getMaxValueFromColumn <- function (index ) {
+getMaxValueFromColumn <- function (index , df ) {
   print("**************************")
   print(" getMaxValueFromColumn   *")
   #print(paste("index: ", index ))
@@ -33,7 +33,7 @@ getMaxValueFromColumn <- function (index ) {
   maxValue
 }
 
-getMinValueFromColumn <- function (index ) {
+getMinValueFromColumn <- function (index , df ) {
   print("**************************")
   print(" getMinValueFromColumn   *")
   #print(paste("index: ", index ))
@@ -50,10 +50,9 @@ getMinValueFromColumn <- function (index ) {
   minValue
 }
 
-getAverageValueFromColumn <- function (index ) {
+getAverageValueFromColumn <- function (index , df ) {
   print("**************************")
-  print(" getAverageValueFromColumn   *")
-  #print(paste("index: ", index ))
+  print(paste(" getAverageValueFromColumn   index: ", index ))
   column <- df[,index]
   #print(column)
   total <- 0
@@ -61,40 +60,62 @@ getAverageValueFromColumn <- function (index ) {
       total = total + i
     
   }
-  print(length(column))
+  #print(length(column))
   averageValue = total / length(column)
   print("**************************")
   averageValue
 }
 
+# índice de la columna con el valor promedio más alto
+getIndexOfColumnWithMaxAverageValue <- function (df ) {
+  print("*******************************************")
+  print(" getIndexOfColumnWithMaxAverageValue   *")
+  maxAverage = 0
+  indexOfMaxAverage = 0
+  for(i in 1:length(df)) {
+    averageValue <- getAverageValueFromColumn(i, df)
+    print(averageValue)
+    if (averageValue >= maxAverage){
+      maxAverage = averageValue
+      indexOfMaxAverage = i
+    }
+  }
+  print("*******************************************")
+  indexOfMaxAverage
+}
+
 ######################################
 # read data
 ######################################
-df <- read.table("datos.txt",  header = TRUE)
-print(df)
+data <- read.table("datos.txt",  header = TRUE)
+print(data )
 
 ######################################
 # test
 ######################################
 
 
-maxValue <- getMaxValueFromColumn(2)
+maxValue <- getMaxValueFromColumn(2, data)
 print(paste("maxValue: ", maxValue ))
-maxValue <- getMaxValueFromColumn(4)
+maxValue <- getMaxValueFromColumn(4, data)
 print(paste("maxValue: ", maxValue ))
 
-minValue <- getMinValueFromColumn(2)
+minValue <- getMinValueFromColumn(2, data)
 print(paste("minValue: ", minValue ))
-minValue <- getMinValueFromColumn(4)
+minValue <- getMinValueFromColumn(4, data)
 print(paste("minValue: ", minValue ))
 
-averageValue <- getAverageValueFromColumn(2)
+averageValue <- getAverageValueFromColumn(2, data)
 print(paste("averageValue: ", averageValue ))
-averageValue <- getAverageValueFromColumn(4)
+averageValue <- getAverageValueFromColumn(4, data)
 print(paste("averageValue: ", averageValue ))
 
 
+dataColumnsWithoutId = data[, 2 : length(data)  ]
+print( dataColumnsWithoutId )
 
+indexOfMaxAverage<- getIndexOfColumnWithMaxAverageValue(dataColumnsWithoutId)
+print(paste("indexOfMaxAverage: ", indexOfMaxAverage ))
 
 
 
