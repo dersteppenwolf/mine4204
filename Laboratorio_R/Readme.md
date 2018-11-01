@@ -1,5 +1,16 @@
 # Laboratorio - R
 
+## Estudiantes
+
+Uniandes Departamento de Ingeniería de Sistemas y Computación 
+
+Curso: MINE 4204 Información, Seguridad y Privacidad
+
+Semestre 2018-2
+
+    Marly Piedrahita (mj.piedrahita)
+    Juan Méndez (jc.mendez)
+
 ## Entrega
 
 Desarrolle y entregue un programa/script en R que le permita leer los datos del archivo anexo y construya funciones para calcular:
@@ -17,3 +28,10 @@ Tenga en cuenta que usted debe desarrollar las funciones (p.e. no use las funcio
 
 * Esta actividad no será calificada. Solo será usada como punto de control.
 * Puede buscar otras fuentes de información sobre R en Google, por ejemplo, rdocumentation.org
+
+
+## Related Info
+
+Tutorials
+
+https://www.datacamp.com/community/tutorials/r-data-import-tutorial
