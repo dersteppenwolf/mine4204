@@ -11,6 +11,10 @@ Semestre 2018-2
     Marly Piedrahita (mj.piedrahita)
     Juan Méndez (jc.mendez)
 
+Código fuente en github:
+
+    https://github.com/dersteppenwolf/mine4204/tree/master/Laboratorio_R
+
 ## Entrega
 
 Desarrolle y entregue un programa/script en R que le permita leer los datos del archivo anexo y construya funciones para calcular:

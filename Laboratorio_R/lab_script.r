@@ -55,6 +55,23 @@ getMinValueFromColumn <- function (index ) {
   minValue
 }
 
+getAverageValueFromColumn <- function (index ) {
+  print("**************************")
+  print(" getAverageValueFromColumn   *")
+  #print(paste("index: ", index ))
+  column <- df[,index]
+  #print(column)
+  total <- 0
+  for(i in column){
+      total = total + i
+    
+  }
+  print(length(column))
+  averageValue = total / length(column)
+  print("**************************")
+  averageValue
+}
+
 df <- read.table("datos.txt",  header = TRUE)
 print(df)
 
@@ -68,6 +85,11 @@ minValue <- getMinValueFromColumn(2)
 print(paste("minValue: ", minValue ))
 minValue <- getMinValueFromColumn(4)
 print(paste("minValue: ", minValue ))
+
+averageValue <- getAverageValueFromColumn(2)
+print(paste("averageValue: ", averageValue ))
+averageValue <- getAverageValueFromColumn(4)
+print(paste("averageValue: ", averageValue ))
 
 
 
