@@ -45,3 +45,6 @@ print(dfNivelPerdida)
 
 dfNivelPerdida2 <- dUtility(obj=df4, xm=df4Resultadomdav$mx, method="IL1")
 print(dfNivelPerdida2)
+
+print  (  dRisk(df4, df4Resultado$xm)    ) 
+print  (  dRisk(df4, df4Resultadomdav$mx)    ) 
