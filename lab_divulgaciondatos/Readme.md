@@ -14,6 +14,7 @@ Semestre 2018-2
             - [b. ¿Es necesario suprimir algun atributo?](#b-%C2%BFes-necesario-suprimir-algun-atributo)
             - [c. ¿Cuáles son deducibles a partir de otros?](#c-%C2%BFcua%CC%81les-son-deducibles-a-partir-de-otros)
             - [d. ¿Cuáles son categóricos y cuáles numéricos?](#d-%C2%BFcua%CC%81les-son-catego%CC%81ricos-y-cua%CC%81les-nume%CC%81ricos)
+        - [Sección 2](#secci%C3%B3n-2)
             - [a. Indique los cambios realizados.](#a-indique-los-cambios-realizados)
 
 ## Autores 	 	
@@ -102,8 +103,8 @@ Numericas: 	16
     G3            395 non-null int64
     w             395 non-null int64
 
+### Sección 2
 
-### Sección 2
 
 Para los atributos binarios y nominales que así lo requieran, cambie las etiquetas de texto por
 identificadores numéricos 
@@ -112,7 +113,7 @@ identificadores numéricos
 ####    a. Indique los cambios realizados.
 
 Procedimiento Realizado:
-Se realizó una revisión a las frecuencias de los diferentes atributos a través de un reporte generado con Pandas Profiling encontrando que algunos atributos valores de baja frecuencia que potencialmente podrían llegar a identificar a individuos particulares.
+Se realizó una revisión a las frecuencias de los diferentes atributos a través de un reporte generado con Jupyter Lab / Pandas Profiling encontrando que algunos atributos valores de baja frecuencia que potencialmente podrían llegar a identificar a individuos particulares.
 
 En ese orden de ideas se decidió recodificar los siguientes atributos: 
 
