@@ -33,6 +33,11 @@ Source Code:
 
 ####    a. ¿Hay relaciones entre algunos de ellos?
 
+Para determinar si hay relaciones entre atributos se realizó un análisis de correlación.
+
+Para la generación de  dicho análisis, además de la revisión descriptiva de los datos,  se utilizó la herramienta Pandas Profiling (https://github.com/pandas-profiling/pandas-profiling). 
+(Nota: Puede encontrar el notebook de Jupyter en el archivo **data_quality.ipynb** que se encuentra en esta misma carpeta )
+
 Se encontró correlación entre algunas variables tales como:
     
     Medu / Fedu
@@ -45,13 +50,14 @@ Se encontró correlación entre algunas variables tales como:
 
 ####    b. ¿Es necesario suprimir algun atributo?
     
-No. Dado que no hay datos que permitan  la identificación de una persona de forma única.   
+No. Dado que en el dataset hay datos que sirvan como identificadores únicos de los individuos.
 
 ####    c. ¿Cuáles son deducibles a partir de otros?
     
-Los atributos que tienen una correlación alta es probable
-que sean deducidos a través de otros.
-Para el caso de este dataset:
+Para los atributos que tienen una correlación alta es probable
+que se puedan hacer deducciones  a través de otros.
+
+Para el caso de este dataset tenemos que hay correlación entre los siguientes atributos:
 
     Medu / Fedu
     Dalc / Walc
@@ -60,13 +66,13 @@ Para el caso de este dataset:
     
 ####    d. ¿Cuáles son categóricos y cuáles numéricos?
 
+La clasificación de Categóricos y Numéricos se obtuvo a partir de la operación info() del dataframe de pandas (https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.info.html ) 
 
 Categoricas: 	17
 
 
     school        395 non-null object
     sex           395 non-null object
-    age           395 non-null int64
     address       395 non-null object
     famsize       395 non-null object
     Pstatus       395 non-null object
@@ -86,6 +92,7 @@ Categoricas: 	17
 
 Numericas: 	16
 
+    age           395 non-null int64
     Medu          395 non-null int64
     Fedu          395 non-null int64
     traveltime    395 non-null int64
@@ -113,9 +120,45 @@ identificadores numéricos
 ####    a. Indique los cambios realizados.
 
 Procedimiento Realizado:
-Se realizó una revisión a las frecuencias de los diferentes atributos a través de un reporte generado con Jupyter Lab / Pandas Profiling encontrando que algunos atributos valores de baja frecuencia que potencialmente podrían llegar a identificar a individuos particulares.
 
-En ese orden de ideas se decidió recodificar los siguientes atributos: 
+Para la conversión de las variables categóricas en numéricas se realizó el siguiente procedimiento:
+
+1. Convertir los atributos de tipo object en variable categórica:
+
+```python
+df['school'] = df['school'].astype('category')
+df['sex'] = df['sex'].astype('category')
+df['address'] = df['address'].astype('category')
+df['famsize'] = df['famsize'].astype('category')
+df['Pstatus'] = df['Pstatus'].astype('category')
+df['Mjob'] = df['Mjob'].astype('category')
+df['Fjob'] = df['Fjob'].astype('category')
+df['reason'] = df['reason'].astype('category')
+df['guardian'] = df['guardian'].astype('category')
+df['famsup'] = df['famsup'].astype('category')
+df['paid'] = df['paid'].astype('category')
+df['activities'] = df['activities'].astype('category')
+df['nursery'] = df['nursery'].astype('category')
+df['higher'] = df['higher'].astype('category')
+df['internet'] = df['internet'].astype('category')
+df['romantic'] = df['romantic'].astype('category')
+df['schoolsup'] = df['schoolsup'].astype('category')
+```
+
+2. Codificar las variables categóricas como numéricas
+
+```python
+cat_columns = df.select_dtypes(['category']).columns
+df[cat_columns] = df[cat_columns].apply(lambda x: x.cat.codes)
+```
+
+3. Exportar los datos resultantes como csv (**dataset_tarea.csv**)
+```python
+df.to_csv('dataset_tarea.csv')
+```
+
+
+
 
 
 
