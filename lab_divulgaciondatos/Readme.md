@@ -11,7 +11,7 @@ Se encontró correlación entre algunas variables tales como:
     G1 / G2 / G3
 
 
-![](correlacion_pearson.png "")
+![](img/correlacion_pearson.png "")
 
 
     b. ¿Es necesario suprimir algun atributo?
@@ -97,7 +97,7 @@ En ese orden de ideas se decidió recodificar los siguientes atributos:
 
 
     dalc
-![](dalcv.png "")
+![](img/dalcv.png "")
 
     fedu
-![](fedu.png "") 
+![](img/fedu.png "") 
