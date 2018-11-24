@@ -1,5 +1,22 @@
-# Respuesta Taller
+# MINE 4204 - Laboratorio - Control estadístico de divulgación de datos
 
+Departamento de Ingeniería de Sistemas y Computación 
+
+Curso: MINE 4204 Información, Seguridad y Privacidad
+
+Semestre 2018-2
+
+## Autores 	 	
+    
+    Marly Piedrahita (mj.piedrahita)
+    Juan Méndez (jc.mendez)
+
+Source Code:
+
+    https://github.com/dersteppenwolf/mine4204/tree/master/lab_divulgaciondatos
+
+
+## Respuestas 
 
 1. 
     a. ¿Hay relaciones entre algunos de ellos?
