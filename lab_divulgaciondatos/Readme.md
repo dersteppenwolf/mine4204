@@ -6,6 +6,16 @@ Curso: MINE 4204 Información, Seguridad y Privacidad
 
 Semestre 2018-2
 
+- [MINE 4204 - Laboratorio - Control estadístico de divulgación de datos](#mine-4204---laboratorio---control-estadi%CC%81stico-de-divulgacio%CC%81n-de-datos)
+    - [Autores](#autores)
+    - [Respuestas](#respuestas)
+        - [Sección 1](#secci%C3%B3n-1)
+            - [a. ¿Hay relaciones entre algunos de ellos?](#a-%C2%BFhay-relaciones-entre-algunos-de-ellos)
+            - [b. ¿Es necesario suprimir algun atributo?](#b-%C2%BFes-necesario-suprimir-algun-atributo)
+            - [c. ¿Cuáles son deducibles a partir de otros?](#c-%C2%BFcua%CC%81les-son-deducibles-a-partir-de-otros)
+            - [d. ¿Cuáles son categóricos y cuáles numéricos?](#d-%C2%BFcua%CC%81les-son-catego%CC%81ricos-y-cua%CC%81les-nume%CC%81ricos)
+            - [a. Indique los cambios realizados.](#a-indique-los-cambios-realizados)
+
 ## Autores 	 	
     
     Marly Piedrahita (mj.piedrahita)
@@ -18,8 +28,9 @@ Source Code:
 
 ## Respuestas 
 
-1. 
-    a. ¿Hay relaciones entre algunos de ellos?
+### Sección 1
+
+####    a. ¿Hay relaciones entre algunos de ellos?
 
 Se encontró correlación entre algunas variables tales como:
     
@@ -31,11 +42,11 @@ Se encontró correlación entre algunas variables tales como:
 ![](img/correlacion_pearson.png "")
 
 
-    b. ¿Es necesario suprimir algun atributo?
+####    b. ¿Es necesario suprimir algun atributo?
     
 No. Dado que no hay datos que permitan  la identificación de una persona de forma única.   
 
-    c. ¿Cuáles son deducibles a partir de otros?
+####    c. ¿Cuáles son deducibles a partir de otros?
     
 Los atributos que tienen una correlación alta es probable
 que sean deducidos a través de otros.
@@ -46,7 +57,7 @@ Para el caso de este dataset:
     G1 / G2 / G3
 
     
-    d. ¿Cuáles son categóricos y cuáles numéricos?
+####    d. ¿Cuáles son categóricos y cuáles numéricos?
 
 
 Categoricas: 	17
@@ -92,11 +103,13 @@ Numericas: 	16
     w             395 non-null int64
 
 
-2. Para los atributos binarios y nominales que así lo requieran, cambie las etiquetas de texto por
+### Sección 2
+
+Para los atributos binarios y nominales que así lo requieran, cambie las etiquetas de texto por
 identificadores numéricos 
 (e.g. en los binarios, cambie “yes” por 1 y “no” por 0).
 
-    a. Indique los cambios realizados.
+####    a. Indique los cambios realizados.
 
 Procedimiento Realizado:
 Se realizó una revisión a las frecuencias de los diferentes atributos a través de un reporte generado con Pandas Profiling encontrando que algunos atributos valores de baja frecuencia que potencialmente podrían llegar a identificar a individuos particulares.
