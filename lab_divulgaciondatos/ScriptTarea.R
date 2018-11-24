@@ -1,6 +1,10 @@
 library(sdcMicro)
 
-df2 <- read.table("/Users/ivanmatis/Downloads/University/security/mine4204/lab_divulgaciondatos/dataset_tarea.csv", header=TRUE) 
+df2 <- read.table("/Users/ivanmatis/Downloads/University/security/mine4204/lab_divulgaciondatos/dataset_tarea.csv", header=TRUE, sep = ",") 
+
+nrow(df2)
+ncol(df2)
+
 print(df2)
 
 

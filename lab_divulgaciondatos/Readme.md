@@ -186,7 +186,11 @@ Comando Utilizado
 ```R
 library(sdcMicro)
 
-df2 <- read.table("/MyDir/lab_divulgaciondatos/dataset_tarea.csv", header=TRUE) 
+df2 <- read.table("/lab_divulgaciondatos/dataset_tarea.csv", header=TRUE, sep = ",") 
+
+nrow(df2)
+ncol(df2)
+
 print(df2)
 ```
 
