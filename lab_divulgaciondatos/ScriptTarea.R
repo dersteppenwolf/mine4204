@@ -14,20 +14,21 @@ print ( grep("school", colnames(df2)) )
 print ( grep("sex", colnames(df2)) )
 print ( grep("address", colnames(df2)) )
 
-#ff <- freqCalc(df2, keyVars=c(2,3,5) , w=35) 
-#print(cbind(df2,ff$fk,ff$Fk))
 
 # calcular frecuencias de las tipo category 
 
 ff <- freqCalc(df2, keyVars=c('school', 'sex', 'address', 'famsize', 'Pstatus', 'Mjob', 'Fjob',
                               'reason', 'guardian', 'schoolsup', 'famsup', 'paid', 'activities',
-                              'nursery', 'higher', 'internet', 'romantic') , w=35) 
+                              'nursery', 'higher', 'internet', 'romantic', 
+                              "Medu", "Fedu", "traveltime", 
+                              "studytime", "failures", "famrel", "freetime",
+                              "goout",  "Dalc" , "Walc" , "health") , w=35) 
 print(cbind(df2,ff$fk,ff$Fk))
 
 print(ff)
 #--------------------------
-#375 obs. violate 2-anonymity 
-#395 obs. violate 3-anonymity 
+#  395 obs. violate 2-anonymity 
+#  395 obs. violate 3-anonymity 
 #--------------------------
 
 
@@ -61,7 +62,10 @@ df2[,13] <- globalRecode(df2[ ,13] , breaks=c(  -1, 0, 2 ) , labels=c( 1 ,2 ))
 
 ff <- freqCalc(df2, keyVars=c('school', 'sex', 'address', 'famsize', 'Pstatus', 'Mjob', 'Fjob',
                               'reason', 'guardian', 'schoolsup', 'famsup', 'paid', 'activities',
-                              'nursery', 'higher', 'internet', 'romantic') , w=35) 
+                              'nursery', 'higher', 'internet', 'romantic', 
+                              "Medu", "Fedu", "traveltime", 
+                              "studytime", "failures", "famrel", "freetime",
+                              "goout",  "Dalc" , "Walc" , "health") , w=35) 
 
 print(cbind(df2,ff$fk,ff$Fk))
 
@@ -73,7 +77,10 @@ print (cbind(df2, ff$fk, ff$Fk, rk ))
 # Local Suppression To Obtain K-Anonymity
 localsupx <- kAnon(df2, keyVars=c('school', 'sex', 'address', 'famsize', 'Pstatus', 'Mjob', 'Fjob',
                                   'reason', 'guardian', 'schoolsup', 'famsup', 'paid', 'activities',
-                                  'nursery', 'higher', 'internet', 'romantic'), k=2)
+                                  'nursery', 'higher', 'internet', 'romantic', 
+                                  "Medu", "Fedu", "traveltime", 
+                                  "studytime", "failures", "famrel", "freetime",
+                                  "goout",  "Dalc" , "Walc" , "health"), k=2)
 plot(localsupx)
 print(localsupx$xAnon)
 
@@ -82,13 +89,16 @@ print(newX)
 print ( grep("w", colnames(newX)) )
 newff <- freqCalc(newX, keyVars=c('school', 'sex', 'address', 'famsize', 'Pstatus', 'Mjob', 'Fjob',
                                   'reason', 'guardian', 'schoolsup', 'famsup', 'paid', 'activities',
-                                  'nursery', 'higher', 'internet', 'romantic') , w=18) 
+                                  'nursery', 'higher', 'internet', 'romantic', 
+                                  "Medu", "Fedu", "traveltime", 
+                                  "studytime", "failures", "famrel", "freetime",
+                                  "goout",  "Dalc" , "Walc" , "health") , w=29) 
 print(cbind(newX,newff$fk,newff$Fk))
 
 print(newff)
 #--------------------------
-#0 obs. violate 2-anonymity 
-#161 obs. violate 3-anonymity 
+#  0 obs. violate 2-anonymity 
+# 252 obs. violate 3-anonymity 
 #--------------------------
 
 newrk <- indivRisk( newff )$rk
@@ -98,10 +108,19 @@ print(newrk)
  
 ###########################################
 #Anonimización variables numéricas
+# se recodifican age, medu y fedu para agrupar las edades:
 #age
 df2[,4] <- globalRecode(df2[ ,4] , breaks=c(  13, 19 , 21) , labels=c( 1 ,2  ))
 #Medu
 df2[,8] <- globalRecode(df2[ ,8] , breaks=c(  0, 3, 4 ) , labels=c( 1 ,2 ))
+#Fedu
+df2[,9] <- globalRecode(df2[ ,9] , breaks=c(  0, 3, 4 ) , labels=c( 1 ,2 ))
 
-
+# rankSwap
+numDf  <- rankSwap(df2, variables=c( "age" , "absences",
+                       "G1","G2", "G3" ),  
+                   TopPercent=20, BottomPercent=20, P = 15)
+  
+   
+   
 

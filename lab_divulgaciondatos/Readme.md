@@ -77,7 +77,7 @@ Para el caso de este dataset tenemos que hay correlación entre los siguientes a
 
 La clasificación de Categóricos y Numéricos se obtuvo a partir de la operación info() del dataframe de pandas (https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.info.html ) 
 
-Categoricas: 	17
+Categoricas: 	28
 
 
     school        395 non-null object
@@ -96,12 +96,7 @@ Categoricas: 	17
     higher        395 non-null object
     internet      395 non-null object
     romantic      395 non-null object
-    schoolsup     395 non-null object
-
-
-Numericas: 	16
-
-    age           395 non-null int64
+    schoolsup     395 non-null object    
     Medu          395 non-null int64
     Fedu          395 non-null int64
     traveltime    395 non-null int64
@@ -113,6 +108,10 @@ Numericas: 	16
     Dalc          395 non-null int64
     Walc          395 non-null int64
     health        395 non-null int64
+
+Atributos numéricos 5:
+
+    age           395 non-null int64
     absences      395 non-null int64
     G1            395 non-null int64
     G2            395 non-null int64
@@ -207,28 +206,29 @@ Puesto que ya identificó qué variables son categóricas, puede proceder con
 
 ####    a. ¿Hay observaciones únicas? ¿Cuántas?
 
-Existen 375 observaciones únicas existen en el dataset de un total de 395 registros existentes en el dataset. Dichas observaciones se identificaron porque violan 2-anonymity
+Todas las  395 son únicas. observaciones se identificaron porque violan 2-anonymity
 
 ```R
-# calcular frecuencias de las tipo category 
 
 ff <- freqCalc(df2, keyVars=c('school', 'sex', 'address', 'famsize', 'Pstatus', 'Mjob', 'Fjob',
                               'reason', 'guardian', 'schoolsup', 'famsup', 'paid', 'activities',
-                              'nursery', 'higher', 'internet', 'romantic') , w=35) 
+                              'nursery', 'higher', 'internet', 'romantic', 
+                              "Medu", "Fedu", "traveltime", 
+                              "studytime", "failures", "famrel", "freetime",
+                              "goout",  "Dalc" , "Walc" , "health") , w=35) 
 print(cbind(df2,ff$fk,ff$Fk))
 
 print(ff)
-# Salida: 
-# --------------------------
-# 375 obs. violate 2-anonymity 
-# 395 obs. violate 3-anonymity 
-# --------------------------
+#--------------------------
+#  395 obs. violate 2-anonymity 
+#  395 obs. violate 3-anonymity 
+#--------------------------
 ```
 
 
 ####    b. ¿El riesgo de re-identificación es muy alto?
 
-El riesgo es muy alto ya que casi el 95% de los registros del dataset son posible identificarlos de forma única a través de la combinación de sus variables categóricas. 
+El riesgo es muy alto ya que  el 100% de los registros del dataset son posible identificarlos de forma única a través de la combinación de sus variables categóricas. 
 
 ```R
 #calculo del riesgo
@@ -275,7 +275,10 @@ df2[,13] <- globalRecode(df2[ ,13] , breaks=c(  -1, 0, 2 ) , labels=c( 1 ,2 ))
 
 ff <- freqCalc(df2, keyVars=c('school', 'sex', 'address', 'famsize', 'Pstatus', 'Mjob', 'Fjob',
                               'reason', 'guardian', 'schoolsup', 'famsup', 'paid', 'activities',
-                              'nursery', 'higher', 'internet', 'romantic') , w=35) 
+                              'nursery', 'higher', 'internet', 'romantic', 
+                              "Medu", "Fedu", "traveltime", 
+                              "studytime", "failures", "famrel", "freetime",
+                              "goout",  "Dalc" , "Walc" , "health") , w=35) 
 
 print(cbind(df2,ff$fk,ff$Fk))
 
@@ -290,10 +293,14 @@ print (cbind(df2, ff$fk, ff$Fk, rk ))
 Luego de la recodificación se aplica el proceso de supresión de datos en todas los atributos categóricos para lograr la k anonimity de 2:
 
 ```R
+
 # Local Suppression To Obtain K-Anonymity
 localsupx <- kAnon(df2, keyVars=c('school', 'sex', 'address', 'famsize', 'Pstatus', 'Mjob', 'Fjob',
                                   'reason', 'guardian', 'schoolsup', 'famsup', 'paid', 'activities',
-                                  'nursery', 'higher', 'internet', 'romantic'), k=2)
+                                  'nursery', 'higher', 'internet', 'romantic', 
+                                  "Medu", "Fedu", "traveltime", 
+                                  "studytime", "failures", "famrel", "freetime",
+                                  "goout",  "Dalc" , "Walc" , "health"), k=2)
 plot(localsupx)
 print(localsupx$xAnon)
 
@@ -302,13 +309,16 @@ print(newX)
 print ( grep("w", colnames(newX)) )
 newff <- freqCalc(newX, keyVars=c('school', 'sex', 'address', 'famsize', 'Pstatus', 'Mjob', 'Fjob',
                                   'reason', 'guardian', 'schoolsup', 'famsup', 'paid', 'activities',
-                                  'nursery', 'higher', 'internet', 'romantic') , w=18) 
+                                  'nursery', 'higher', 'internet', 'romantic', 
+                                  "Medu", "Fedu", "traveltime", 
+                                  "studytime", "failures", "famrel", "freetime",
+                                  "goout",  "Dalc" , "Walc" , "health") , w=29) 
 print(cbind(newX,newff$fk,newff$Fk))
 
 print(newff)
 #--------------------------
-#0 obs. violate 2-anonymity 
-#161 obs. violate 3-anonymity 
+#  0 obs. violate 2-anonymity 
+# 252 obs. violate 3-anonymity 
 #--------------------------
 
 newrk <- indivRisk( newff )$rk
@@ -317,7 +327,7 @@ print(newrk)
 
 ```
 
-Como resultado del proceso se obtiene que ningún registro viola la regla de k anonymity = 2, y que 161 registros violan la k anonymity de 3.
+Como resultado del proceso se obtiene que ningún registro viola la regla de k anonymity = 2, y que 252 registros violan la k anonymity de 3.
 
 En el siguiente gráfico se encuentran enumeradas la cantidad de supresiones por atributo:
 
@@ -332,6 +342,10 @@ En el siguiente gráfico se encuentran enumeradas la cantidad de supresiones por
 
 
 ####    a. Copie los comandos ejecutados para cumplir con este punto.
+
+
+
+
 
 ### Sección 6
 
