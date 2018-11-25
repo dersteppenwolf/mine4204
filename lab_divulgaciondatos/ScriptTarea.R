@@ -108,13 +108,6 @@ print(newrk)
  
 ###########################################
 #Anonimización variables numéricas
-# se recodifican age, medu y fedu para agrupar las edades:
-#age
-df2[,4] <- globalRecode(df2[ ,4] , breaks=c(  13, 19 , 21) , labels=c( 1 ,2  ))
-#Medu
-df2[,8] <- globalRecode(df2[ ,8] , breaks=c(  0, 3, 4 ) , labels=c( 1 ,2 ))
-#Fedu
-df2[,9] <- globalRecode(df2[ ,9] , breaks=c(  0, 3, 4 ) , labels=c( 1 ,2 ))
 
 # rankSwap
 numDf  <- rankSwap(df2, variables=c( "age" , "absences",
