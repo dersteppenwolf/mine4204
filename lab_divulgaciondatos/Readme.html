@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+        <title>MINE 4204 - Laboratorio - Control estadístico de divulgación de datos</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+        <style>
+/*--------------------------------------------------------------------------------------------- * Copyright (c) Microsoft Corporation. All rights reserved. * Licensed under the MIT License. See License.txt in the project root for license information. *--------------------------------------------------------------------------------------------*/ body { font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback"; font-size: 14px; padding: 0 26px; line-height: 22px; word-wrap: break-word; } #code-csp-warning { position: fixed; top: 0; right: 0; color: white; margin: 16px; text-align: center; font-size: 12px; font-family: sans-serif; background-color:#444444; cursor: pointer; padding: 6px; box-shadow: 1px 1px 1px rgba(0,0,0,.25); } #code-csp-warning:hover { text-decoration: none; background-color:#007acc; box-shadow: 2px 2px 2px rgba(0,0,0,.25); } body.scrollBeyondLastLine { margin-bottom: calc(100vh - 22px); } body.showEditorSelection .code-line { position: relative; } body.showEditorSelection .code-active-line:before, body.showEditorSelection .code-line:hover:before { content: ""; display: block; position: absolute; top: 0; left: -12px; height: 100%; } body.showEditorSelection li.code-active-line:before, body.showEditorSelection li.code-line:hover:before { left: -30px; } .vscode-light.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); } .vscode-light.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); } .vscode-light.showEditorSelection .code-line .code-line:hover:before { border-left: none; } .vscode-dark.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); } .vscode-dark.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); } .vscode-dark.showEditorSelection .code-line .code-line:hover:before { border-left: none; } .vscode-high-contrast.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(255, 160, 0, 0.7); } .vscode-high-contrast.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(255, 160, 0, 1); } .vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before { border-left: none; } img { max-width: 100%; max-height: 100%; } a { text-decoration: none; } a:hover { text-decoration: underline; } a:focus, input:focus, select:focus, textarea:focus { outline: 1px solid -webkit-focus-ring-color; outline-offset: -1px; } hr { border: 0; height: 2px; border-bottom: 2px solid; } h1 { padding-bottom: 0.3em; line-height: 1.2; border-bottom-width: 1px; border-bottom-style: solid; } h1, h2, h3 { font-weight: normal; } h1 code, h2 code, h3 code, h4 code, h5 code, h6 code { font-size: inherit; line-height: auto; } table { border-collapse: collapse; } table > thead > tr > th { text-align: left; border-bottom: 1px solid; } table > thead > tr > th, table > thead > tr > td, table > tbody > tr > th, table > tbody > tr > td { padding: 5px 10px; } table > tbody > tr + tr > td { border-top: 1px solid; } blockquote { margin: 0 7px 0 5px; padding: 0 16px 0 10px; border-left-width: 5px; border-left-style: solid; } code { font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback"; font-size: 14px; line-height: 19px; } body.wordWrap pre { white-space: pre-wrap; } .mac code { font-size: 12px; line-height: 18px; } pre:not(.hljs), pre.hljs code > div { padding: 16px; border-radius: 3px; overflow: auto; } /** Theming */ pre code { color: var(--vscode-editor-foreground); } .vscode-light pre:not(.hljs), .vscode-light code > div { background-color: rgba(220, 220, 220, 0.4); } .vscode-dark pre:not(.hljs), .vscode-dark code > div { background-color: rgba(10, 10, 10, 0.4); } .vscode-high-contrast pre:not(.hljs), .vscode-high-contrast code > div { background-color: rgb(0, 0, 0); } .vscode-high-contrast h1 { border-color: rgb(0, 0, 0); } .vscode-light table > thead > tr > th { border-color: rgba(0, 0, 0, 0.69); } .vscode-dark table > thead > tr > th { border-color: rgba(255, 255, 255, 0.69); } .vscode-light h1, .vscode-light hr, .vscode-light table > tbody > tr + tr > td { border-color: rgba(0, 0, 0, 0.18); } .vscode-dark h1, .vscode-dark hr, .vscode-dark table > tbody > tr + tr > td { border-color: rgba(255, 255, 255, 0.18); } 
+</style>
+<style>
+/* Tomorrow Theme */ /* http://jmblog.github.com/color-themes-for-google-code-highlightjs */ /* Original theme - https://github.com/chriskempson/tomorrow-theme */ /* Tomorrow Comment */ .hljs-comment, .hljs-quote { color: #8e908c; } /* Tomorrow Red */ .hljs-variable, .hljs-template-variable, .hljs-tag, .hljs-name, .hljs-selector-id, .hljs-selector-class, .hljs-regexp, .hljs-deletion { color: #c82829; } /* Tomorrow Orange */ .hljs-number, .hljs-built_in, .hljs-builtin-name, .hljs-literal, .hljs-type, .hljs-params, .hljs-meta, .hljs-link { color: #f5871f; } /* Tomorrow Yellow */ .hljs-attribute { color: #eab700; } /* Tomorrow Green */ .hljs-string, .hljs-symbol, .hljs-bullet, .hljs-addition { color: #718c00; } /* Tomorrow Blue */ .hljs-title, .hljs-section { color: #4271ae; } /* Tomorrow Purple */ .hljs-keyword, .hljs-selector-tag { color: #8959a8; } .hljs { display: block; overflow-x: auto; color: #4d4d4c; padding: 0.5em; } .hljs-emphasis { font-style: italic; } .hljs-strong { font-weight: bold; }
+</style>
+<style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 id="mine-4204---laboratorio---control-estadi%CC%81stico-de-divulgacio%CC%81n-de-datos">MINE 4204 - Laboratorio - Control estadístico de divulgación de datos</h1>
+<p>Departamento de Ingeniería de Sistemas y Computación</p>
+<p>Curso: MINE 4204 Información, Seguridad y Privacidad</p>
+<p>Semestre 2018-2</p>
+<ul>
+<li><a href="#mine-4204---laboratorio---control-estadi%CC%81stico-de-divulgacio%CC%81n-de-datos">MINE 4204 - Laboratorio - Control estadístico de divulgación de datos</a>
+<ul>
+<li><a href="#autores">Autores</a></li>
+<li><a href="#respuestas">Respuestas</a>
+<ul>
+<li><a href="#secci%C3%B3n-1">Sección 1</a>
+<ul>
+<li><a href="#a-%C2%BFhay-relaciones-entre-algunos-de-ellos">a. ¿Hay relaciones entre algunos de ellos?</a></li>
+<li><a href="#b-%C2%BFes-necesario-suprimir-algun-atributo">b. ¿Es necesario suprimir algun atributo?</a></li>
+<li><a href="#c-%C2%BFcua%CC%81les-son-deducibles-a-partir-de-otros">c. ¿Cuáles son deducibles a partir de otros?</a></li>
+<li><a href="#d-%C2%BFcua%CC%81les-son-catego%CC%81ricos-y-cua%CC%81les-nume%CC%81ricos">d. ¿Cuáles son categóricos y cuáles numéricos?</a></li>
+</ul>
+</li>
+<li><a href="#secci%C3%B3n-2">Sección 2</a>
+<ul>
+<li><a href="#a-indique-los-cambios-realizados">a. Indique los cambios realizados.</a></li>
+</ul>
+</li>
+<li><a href="#secci%C3%B3n-3">Sección 3</a></li>
+<li><a href="#secci%C3%B3n-4">Sección 4</a>
+<ul>
+<li><a href="#a-%C2%BFhay-observaciones-u%CC%81nicas-%C2%BFcua%CC%81ntas">a. ¿Hay observaciones únicas? ¿Cuántas?</a></li>
+<li><a href="#b-%C2%BFel-riesgo-de-re-identificacio%CC%81n-es-muy-alto">b. ¿El riesgo de re-identificación es muy alto?</a></li>
+<li><a href="#c-copie-los-comandos-ejecutados-para-cumplir-con-este-punto">c. Copie los comandos ejecutados para cumplir con este punto.</a></li>
+</ul>
+</li>
+<li><a href="#secci%C3%B3n-5">Sección 5</a>
+<ul>
+<li><a href="#a-copie-los-comandos-ejecutados-para-cumplir-con-este-punto">a. Copie los comandos ejecutados para cumplir con este punto.</a></li>
+</ul>
+</li>
+<li><a href="#secci%C3%B3n-6">Sección 6</a>
+<ul>
+<li><a href="#a-copie-los-comandos-ejecutados-para-cumplir-con-este-punto-1">a. Copie los comandos ejecutados para cumplir con este punto.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="autores">Autores</h2>
+<pre><code>Marly Piedrahita (mj.piedrahita)
+Juan Méndez (jc.mendez)
+</code></pre>
+<p>Source Code:</p>
+<pre><code>https://github.com/dersteppenwolf/mine4204/tree/master/lab_divulgaciondatos
+</code></pre>
+<h2 id="respuestas">Respuestas</h2>
+<h3 id="secci%C3%B3n-1">Sección 1</h3>
+<h4 id="a-%C2%BFhay-relaciones-entre-algunos-de-ellos">a. ¿Hay relaciones entre algunos de ellos?</h4>
+<p>Para determinar si hay relaciones entre atributos se realizó un análisis de correlación.</p>
+<p>Para la generación de  dicho análisis, además de la revisión descriptiva de los datos,  se utilizó la herramienta Pandas Profiling (<a href="https://github.com/pandas-profiling/pandas-profiling">https://github.com/pandas-profiling/pandas-profiling</a>).
+(Nota: Puede encontrar el notebook de Jupyter en el archivo <strong>data_quality.ipynb</strong> que se encuentra en esta misma carpeta )</p>
+<p>Se encontró correlación entre algunas variables tales como:</p>
+<pre><code>Medu / Fedu
+Dalc / Walc
+G1 / G2 / G3
+</code></pre>
+<p><img src="file:///Users/ivanmatis/Downloads/University/security/mine4204/lab_divulgaciondatos/img/correlacion_pearson.png" alt=""></p>
+<h4 id="b-%C2%BFes-necesario-suprimir-algun-atributo">b. ¿Es necesario suprimir algun atributo?</h4>
+<p>No. Dado que en el dataset hay datos que sirvan como identificadores únicos de los individuos.</p>
+<h4 id="c-%C2%BFcua%CC%81les-son-deducibles-a-partir-de-otros">c. ¿Cuáles son deducibles a partir de otros?</h4>
+<p>Para los atributos que tienen una correlación alta es probable
+que se puedan hacer deducciones  a través de otros.</p>
+<p>Para el caso de este dataset tenemos que hay correlación entre los siguientes atributos:</p>
+<pre><code>Medu / Fedu
+Dalc / Walc
+G1 / G2 / G3
+</code></pre>
+<h4 id="d-%C2%BFcua%CC%81les-son-catego%CC%81ricos-y-cua%CC%81les-nume%CC%81ricos">d. ¿Cuáles son categóricos y cuáles numéricos?</h4>
+<p>La clasificación de Categóricos y Numéricos se obtuvo a partir de la operación info() del dataframe de pandas (<a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.info.html">https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.info.html</a> )</p>
+<p>Categoricas: 	28</p>
+<pre><code>school        395 non-null object
+sex           395 non-null object
+address       395 non-null object
+famsize       395 non-null object
+Pstatus       395 non-null object
+Mjob          395 non-null object
+Fjob          395 non-null object
+reason        395 non-null object
+guardian      395 non-null object
+famsup        395 non-null object
+paid          395 non-null object
+activities    395 non-null object
+nursery       395 non-null object
+higher        395 non-null object
+internet      395 non-null object
+romantic      395 non-null object
+schoolsup     395 non-null object    
+Medu          395 non-null int64
+Fedu          395 non-null int64
+traveltime    395 non-null int64
+studytime     395 non-null int64
+failures      395 non-null int64
+famrel        395 non-null int64
+freetime      395 non-null int64
+goout         395 non-null int64
+Dalc          395 non-null int64
+Walc          395 non-null int64
+health        395 non-null int64
+</code></pre>
+<p>Atributos numéricos 5:</p>
+<pre><code>age           395 non-null int64
+absences      395 non-null int64
+G1            395 non-null int64
+G2            395 non-null int64
+G3            395 non-null int64
+w             395 non-null int64
+</code></pre>
+<h3 id="secci%C3%B3n-2">Sección 2</h3>
+<p>Para los atributos binarios y nominales que así lo requieran, cambie las etiquetas de texto por
+identificadores numéricos
+(e.g. en los binarios, cambie “yes” por 1 y “no” por 0).</p>
+<h4 id="a-indique-los-cambios-realizados">a. Indique los cambios realizados.</h4>
+<p>Procedimiento Realizado:</p>
+<p>Para la conversión de las variables categóricas en numéricas se realizó el siguiente procedimiento:</p>
+<ol>
+<li>Convertir los atributos de tipo object en variable categórica:</li>
+</ol>
+<pre><code class="language-python"><div>df[<span class="hljs-string">'school'</span>] = df[<span class="hljs-string">'school'</span>].astype(<span class="hljs-string">'category'</span>)
+df[<span class="hljs-string">'sex'</span>] = df[<span class="hljs-string">'sex'</span>].astype(<span class="hljs-string">'category'</span>)
+df[<span class="hljs-string">'address'</span>] = df[<span class="hljs-string">'address'</span>].astype(<span class="hljs-string">'category'</span>)
+df[<span class="hljs-string">'famsize'</span>] = df[<span class="hljs-string">'famsize'</span>].astype(<span class="hljs-string">'category'</span>)
+df[<span class="hljs-string">'Pstatus'</span>] = df[<span class="hljs-string">'Pstatus'</span>].astype(<span class="hljs-string">'category'</span>)
+df[<span class="hljs-string">'Mjob'</span>] = df[<span class="hljs-string">'Mjob'</span>].astype(<span class="hljs-string">'category'</span>)
+df[<span class="hljs-string">'Fjob'</span>] = df[<span class="hljs-string">'Fjob'</span>].astype(<span class="hljs-string">'category'</span>)
+df[<span class="hljs-string">'reason'</span>] = df[<span class="hljs-string">'reason'</span>].astype(<span class="hljs-string">'category'</span>)
+df[<span class="hljs-string">'guardian'</span>] = df[<span class="hljs-string">'guardian'</span>].astype(<span class="hljs-string">'category'</span>)
+df[<span class="hljs-string">'famsup'</span>] = df[<span class="hljs-string">'famsup'</span>].astype(<span class="hljs-string">'category'</span>)
+df[<span class="hljs-string">'paid'</span>] = df[<span class="hljs-string">'paid'</span>].astype(<span class="hljs-string">'category'</span>)
+df[<span class="hljs-string">'activities'</span>] = df[<span class="hljs-string">'activities'</span>].astype(<span class="hljs-string">'category'</span>)
+df[<span class="hljs-string">'nursery'</span>] = df[<span class="hljs-string">'nursery'</span>].astype(<span class="hljs-string">'category'</span>)
+df[<span class="hljs-string">'higher'</span>] = df[<span class="hljs-string">'higher'</span>].astype(<span class="hljs-string">'category'</span>)
+df[<span class="hljs-string">'internet'</span>] = df[<span class="hljs-string">'internet'</span>].astype(<span class="hljs-string">'category'</span>)
+df[<span class="hljs-string">'romantic'</span>] = df[<span class="hljs-string">'romantic'</span>].astype(<span class="hljs-string">'category'</span>)
+df[<span class="hljs-string">'schoolsup'</span>] = df[<span class="hljs-string">'schoolsup'</span>].astype(<span class="hljs-string">'category'</span>)
+</div></code></pre>
+<ol start="2">
+<li>Codificar las variables categóricas como numéricas</li>
+</ol>
+<pre><code class="language-python"><div>cat_columns = df.select_dtypes([<span class="hljs-string">'category'</span>]).columns
+df[cat_columns] = df[cat_columns].apply(<span class="hljs-keyword">lambda</span> x: x.cat.codes)
+</div></code></pre>
+<ol start="3">
+<li>Exportar los datos resultantes como csv (<strong>dataset_tarea.csv</strong>)</li>
+</ol>
+<pre><code class="language-python"><div>df.to_csv(<span class="hljs-string">'dataset_tarea.csv'</span>)
+</div></code></pre>
+<p>Ejemplo de la tabla recodificada:</p>
+<p><img src="file:///Users/ivanmatis/Downloads/University/security/mine4204/lab_divulgaciondatos/img/recode.png" alt=""></p>
+<h3 id="secci%C3%B3n-3">Sección 3</h3>
+<p>Cargue el archivo resultante a RStudio. Para ello,puede utilizar el siguiente comando:</p>
+<pre><code class="language-R"><div>&lt;suFrame&gt; =read.table(<span class="hljs-string">"C:/la_ruta_a_su_archivo.csv"</span>,sep=<span class="hljs-string">";"</span>,header=<span class="hljs-literal">TRUE</span>)
+</div></code></pre>
+<p>Comando Utilizado</p>
+<pre><code class="language-R"><div><span class="hljs-keyword">library</span>(sdcMicro)
+
+df2 &lt;- read.table(<span class="hljs-string">"/lab_divulgaciondatos/dataset_tarea.csv"</span>, header=<span class="hljs-literal">TRUE</span>, sep = <span class="hljs-string">","</span>) 
+
+nrow(df2)
+ncol(df2)
+
+print(df2)
+</div></code></pre>
+<p>Ejemplo Salida R Studio:</p>
+<p><img src="file:///Users/ivanmatis/Downloads/University/security/mine4204/lab_divulgaciondatos/img/recode_load_r.png" alt=""></p>
+<h3 id="secci%C3%B3n-4">Sección 4</h3>
+<p>Puesto que ya identificó qué variables son categóricas, puede proceder con la anonimización de dichas variables. Empiece identificando las frecuencias y riesgos de divulgación. Una vez tenga conocimiento de la existencia de combinaciones únicas de variables, utilice los métodos de recodificación global y supresión local para reducir el riesgo asociado. Puede graficar este último y valerse de los métodos previamente presentados.</p>
+<h4 id="a-%C2%BFhay-observaciones-u%CC%81nicas-%C2%BFcua%CC%81ntas">a. ¿Hay observaciones únicas? ¿Cuántas?</h4>
+<p>Todas las  395 son únicas. observaciones se identificaron porque violan 2-anonymity</p>
+<pre><code class="language-R"><div>
+ff &lt;- freqCalc(df2, keyVars=c(<span class="hljs-string">'school'</span>, <span class="hljs-string">'sex'</span>, <span class="hljs-string">'address'</span>, <span class="hljs-string">'famsize'</span>, <span class="hljs-string">'Pstatus'</span>, <span class="hljs-string">'Mjob'</span>, <span class="hljs-string">'Fjob'</span>,
+                              <span class="hljs-string">'reason'</span>, <span class="hljs-string">'guardian'</span>, <span class="hljs-string">'schoolsup'</span>, <span class="hljs-string">'famsup'</span>, <span class="hljs-string">'paid'</span>, <span class="hljs-string">'activities'</span>,
+                              <span class="hljs-string">'nursery'</span>, <span class="hljs-string">'higher'</span>, <span class="hljs-string">'internet'</span>, <span class="hljs-string">'romantic'</span>, 
+                              <span class="hljs-string">"Medu"</span>, <span class="hljs-string">"Fedu"</span>, <span class="hljs-string">"traveltime"</span>, 
+                              <span class="hljs-string">"studytime"</span>, <span class="hljs-string">"failures"</span>, <span class="hljs-string">"famrel"</span>, <span class="hljs-string">"freetime"</span>,
+                              <span class="hljs-string">"goout"</span>,  <span class="hljs-string">"Dalc"</span> , <span class="hljs-string">"Walc"</span> , <span class="hljs-string">"health"</span>) , w=<span class="hljs-number">35</span>) 
+print(cbind(df2,ff$fk,ff$Fk))
+
+print(ff)
+<span class="hljs-comment">#--------------------------</span>
+<span class="hljs-comment">#  395 obs. violate 2-anonymity </span>
+<span class="hljs-comment">#  395 obs. violate 3-anonymity </span>
+<span class="hljs-comment">#--------------------------</span>
+</div></code></pre>
+<h4 id="b-%C2%BFel-riesgo-de-re-identificacio%CC%81n-es-muy-alto">b. ¿El riesgo de re-identificación es muy alto?</h4>
+<p>El riesgo es muy alto ya que  el 100% de los registros del dataset son posible identificarlos de forma única a través de la combinación de sus variables categóricas.</p>
+<pre><code class="language-R"><div><span class="hljs-comment">#calculo del riesgo</span>
+
+rk &lt;- indivRisk(ff)$rk
+print (cbind(df2, ff$fk, ff$Fk, rk ))
+
+</div></code></pre>
+<h4 id="c-copie-los-comandos-ejecutados-para-cumplir-con-este-punto">c. Copie los comandos ejecutados para cumplir con este punto.</h4>
+<p>Nota: Puede suponer que se cumple el supuesto de distribución Poisson de fk y Fk, porque los datos fueron especialmente preparados para ello.</p>
+<p>Para la selección de las variables a tener en cuenta durante la recodificación se utilizan los atributos
+<em>mjob</em>, <em>fjob</em>, <em>reason</em> y <em>guardian</em> debido a que presentan más de dos valores donde uno de ellos tiene una frecuencia muy baja de fácil identificación:</p>
+<p><img src="file:///Users/ivanmatis/Downloads/University/security/mine4204/lab_divulgaciondatos/img/mjob.png" alt="">
+<img src="file:///Users/ivanmatis/Downloads/University/security/mine4204/lab_divulgaciondatos/img/fjob.png" alt="">
+<img src="file:///Users/ivanmatis/Downloads/University/security/mine4204/lab_divulgaciondatos/img/reason.png" alt="">
+<img src="file:///Users/ivanmatis/Downloads/University/security/mine4204/lab_divulgaciondatos/img/guardian.png" alt=""></p>
+<p>Comandos para recodificar:</p>
+<pre><code class="language-R"><div><span class="hljs-comment">#Anonimización variables cartegóricas</span>
+
+<span class="hljs-comment">#mjob</span>
+df2[,<span class="hljs-number">10</span>] &lt;- globalRecode(df2[ ,<span class="hljs-number">10</span>] , breaks=c(  -<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span> ) , labels=c( <span class="hljs-number">1</span> ,<span class="hljs-number">2</span> ))
+
+<span class="hljs-comment">#fjob</span>
+df2[,<span class="hljs-number">11</span>] &lt;- globalRecode(df2[ ,<span class="hljs-number">11</span>] , breaks=c(  -<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span> ) , labels=c( <span class="hljs-number">1</span> ,<span class="hljs-number">2</span> ))
+
+<span class="hljs-comment">#reason</span>
+df2[,<span class="hljs-number">12</span>] &lt;- globalRecode(df2[ ,<span class="hljs-number">12</span>] , breaks=c(  -<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">3</span> ) , labels=c( <span class="hljs-number">1</span> ,<span class="hljs-number">2</span> ))
+
+<span class="hljs-comment">#guardian</span>
+df2[,<span class="hljs-number">13</span>] &lt;- globalRecode(df2[ ,<span class="hljs-number">13</span>] , breaks=c(  -<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span> ) , labels=c( <span class="hljs-number">1</span> ,<span class="hljs-number">2</span> ))
+
+<span class="hljs-comment"># calcular frecuencias de las tipo category después de anonimización</span>
+
+ff &lt;- freqCalc(df2, keyVars=c(<span class="hljs-string">'school'</span>, <span class="hljs-string">'sex'</span>, <span class="hljs-string">'address'</span>, <span class="hljs-string">'famsize'</span>, <span class="hljs-string">'Pstatus'</span>, <span class="hljs-string">'Mjob'</span>, <span class="hljs-string">'Fjob'</span>,
+                              <span class="hljs-string">'reason'</span>, <span class="hljs-string">'guardian'</span>, <span class="hljs-string">'schoolsup'</span>, <span class="hljs-string">'famsup'</span>, <span class="hljs-string">'paid'</span>, <span class="hljs-string">'activities'</span>,
+                              <span class="hljs-string">'nursery'</span>, <span class="hljs-string">'higher'</span>, <span class="hljs-string">'internet'</span>, <span class="hljs-string">'romantic'</span>, 
+                              <span class="hljs-string">"Medu"</span>, <span class="hljs-string">"Fedu"</span>, <span class="hljs-string">"traveltime"</span>, 
+                              <span class="hljs-string">"studytime"</span>, <span class="hljs-string">"failures"</span>, <span class="hljs-string">"famrel"</span>, <span class="hljs-string">"freetime"</span>,
+                              <span class="hljs-string">"goout"</span>,  <span class="hljs-string">"Dalc"</span> , <span class="hljs-string">"Walc"</span> , <span class="hljs-string">"health"</span>) , w=<span class="hljs-number">35</span>) 
+
+print(cbind(df2,ff$fk,ff$Fk))
+
+<span class="hljs-comment">#calculo del riesgo después de anonimización</span>
+
+rk &lt;- indivRisk(ff)$rk
+print (cbind(df2, ff$fk, ff$Fk, rk ))
+
+
+</div></code></pre>
+<p>Luego de la recodificación se aplica el proceso de supresión de datos en todas los atributos categóricos para lograr la k anonimity de 2:</p>
+<pre><code class="language-R"><div>
+<span class="hljs-comment"># Local Suppression To Obtain K-Anonymity</span>
+localsupx &lt;- kAnon(df2, keyVars=c(<span class="hljs-string">'school'</span>, <span class="hljs-string">'sex'</span>, <span class="hljs-string">'address'</span>, <span class="hljs-string">'famsize'</span>, <span class="hljs-string">'Pstatus'</span>, <span class="hljs-string">'Mjob'</span>, <span class="hljs-string">'Fjob'</span>,
+                                  <span class="hljs-string">'reason'</span>, <span class="hljs-string">'guardian'</span>, <span class="hljs-string">'schoolsup'</span>, <span class="hljs-string">'famsup'</span>, <span class="hljs-string">'paid'</span>, <span class="hljs-string">'activities'</span>,
+                                  <span class="hljs-string">'nursery'</span>, <span class="hljs-string">'higher'</span>, <span class="hljs-string">'internet'</span>, <span class="hljs-string">'romantic'</span>, 
+                                  <span class="hljs-string">"Medu"</span>, <span class="hljs-string">"Fedu"</span>, <span class="hljs-string">"traveltime"</span>, 
+                                  <span class="hljs-string">"studytime"</span>, <span class="hljs-string">"failures"</span>, <span class="hljs-string">"famrel"</span>, <span class="hljs-string">"freetime"</span>,
+                                  <span class="hljs-string">"goout"</span>,  <span class="hljs-string">"Dalc"</span> , <span class="hljs-string">"Walc"</span> , <span class="hljs-string">"health"</span>), k=<span class="hljs-number">2</span>)
+plot(localsupx)
+print(localsupx$xAnon)
+
+newX &lt;- cbind(localsupx$xAnon, df2$w);
+print(newX)
+print ( grep(<span class="hljs-string">"w"</span>, colnames(newX)) )
+newff &lt;- freqCalc(newX, keyVars=c(<span class="hljs-string">'school'</span>, <span class="hljs-string">'sex'</span>, <span class="hljs-string">'address'</span>, <span class="hljs-string">'famsize'</span>, <span class="hljs-string">'Pstatus'</span>, <span class="hljs-string">'Mjob'</span>, <span class="hljs-string">'Fjob'</span>,
+                                  <span class="hljs-string">'reason'</span>, <span class="hljs-string">'guardian'</span>, <span class="hljs-string">'schoolsup'</span>, <span class="hljs-string">'famsup'</span>, <span class="hljs-string">'paid'</span>, <span class="hljs-string">'activities'</span>,
+                                  <span class="hljs-string">'nursery'</span>, <span class="hljs-string">'higher'</span>, <span class="hljs-string">'internet'</span>, <span class="hljs-string">'romantic'</span>, 
+                                  <span class="hljs-string">"Medu"</span>, <span class="hljs-string">"Fedu"</span>, <span class="hljs-string">"traveltime"</span>, 
+                                  <span class="hljs-string">"studytime"</span>, <span class="hljs-string">"failures"</span>, <span class="hljs-string">"famrel"</span>, <span class="hljs-string">"freetime"</span>,
+                                  <span class="hljs-string">"goout"</span>,  <span class="hljs-string">"Dalc"</span> , <span class="hljs-string">"Walc"</span> , <span class="hljs-string">"health"</span>) , w=<span class="hljs-number">29</span>) 
+print(cbind(newX,newff$fk,newff$Fk))
+
+print(newff)
+<span class="hljs-comment">#--------------------------</span>
+<span class="hljs-comment">#  0 obs. violate 2-anonymity </span>
+<span class="hljs-comment"># 252 obs. violate 3-anonymity </span>
+<span class="hljs-comment">#--------------------------</span>
+
+newrk &lt;- indivRisk( newff )$rk
+print (cbind(newX, newff$fk , newff$Fk , newrk ))
+print(newrk)
+
+</div></code></pre>
+<p>Como resultado del proceso se obtiene que ningún registro viola la regla de k anonymity = 2, y que 252 registros violan la k anonymity de 3.</p>
+<p>En el siguiente gráfico se encuentran enumeradas la cantidad de supresiones por atributo:</p>
+<p><img src="file:///Users/ivanmatis/Downloads/University/security/mine4204/lab_divulgaciondatos/img/supr.png" alt=""></p>
+<h3 id="secci%C3%B3n-5">Sección 5</h3>
+<ol>
+<li>Es necesario continuar el proceso con las variables numéricas. Considere las posibilidades de añadir ruido, o efectuar rank swapping sobre alguno(s) de ellos. Posteriormente, utilice el procedimiento de microagreagación para perturbar el conjunto de datos. Por último, no olvide evaluar estas transformaciones verificando la pérdida de información y el riesgo de divulgación. Note que estos dos últimos representan un trade-off a nivel del proceso de anonimización, porque el riesgo se disminuye sustancialmente a medida que aumenta el nivel de pérdida de información, pero, como es natural, no es deseable que este nivel crezca exponencialmente; razón por la cual es necesario encontrar un equilibrio entre ambos.</li>
+</ol>
+<h4 id="a-copie-los-comandos-ejecutados-para-cumplir-con-este-punto">a. Copie los comandos ejecutados para cumplir con este punto.</h4>
+<pre><code class="language-R"><div>
+<span class="hljs-comment">###########################################</span>
+<span class="hljs-comment">#Anonimización variables numéricas</span>
+
+<span class="hljs-comment"># rankSwap</span>
+numDf  &lt;- rankSwap(df2, variables=c( <span class="hljs-string">"age"</span> , <span class="hljs-string">"absences"</span>,
+                       <span class="hljs-string">"G1"</span>,<span class="hljs-string">"G2"</span>, <span class="hljs-string">"G3"</span> ),  
+                   TopPercent=<span class="hljs-number">20</span>, BottomPercent=<span class="hljs-number">20</span>, P = <span class="hljs-number">15</span>)
+  
+print(numDf)   
+
+numericalOnlyDF &lt;-  numDf[,c(<span class="hljs-string">"age"</span> , <span class="hljs-string">"absences"</span>,
+                             <span class="hljs-string">"G1"</span>,<span class="hljs-string">"G2"</span>, <span class="hljs-string">"G3"</span>)]
+print(numericalOnlyDF)
+
+rNoise &lt;- addNoise(numericalOnlyDF,method=<span class="hljs-string">"additive"</span>) 
+print(rNoise$xm)
+
+nivelPerdidaNoise &lt;- dUtility(numericalOnlyDF, xm=rNoise$xm, method=<span class="hljs-string">"IL1"</span>)
+print(nivelPerdidaNoise)
+
+
+rMagg &lt;- microaggregation(numericalOnlyDF, method =<span class="hljs-string">"mdav"</span>,aggr = <span class="hljs-number">3</span>) 
+print(rMagg$mx)
+
+nivelPerdidaNum &lt;- dUtility(numericalOnlyDF, xm=rMagg$xm, method=<span class="hljs-string">"IL1"</span>)
+print(nivelPerdidaNum)
+
+print  (  dRisk(numericalOnlyDF, rMagg$xm)    ) 
+print  (  dRisk(df4, df4Resultadomdav$mx)    ) 
+
+</div></code></pre>
+<h3 id="secci%C3%B3n-6">Sección 6</h3>
+<p>Una vez haya verificado que el riesgo ha sido efectivamente reducido en ambos casos(variables categóricas y numéricas), unifique todo en un único dataset anonimizado que usted divulgaría sin temor de re- identificación de los estudiantes portugueses del estudio.</p>
+<h4 id="a-copie-los-comandos-ejecutados-para-cumplir-con-este-punto-1">a. Copie los comandos ejecutados para cumplir con este punto.</h4>
+<p>Con los datos categóricos y numéricos procesados se genera el archivo dataset_anonimizado_tarea.csv :</p>
+<pre><code class="language-R"><div><span class="hljs-comment">## archivo final</span>
+<span class="hljs-comment"># categoricas</span>
+print(newX)
+<span class="hljs-comment"># numericas</span>
+print(rMagg$mx)
+<span class="hljs-comment">#print(rMagg)</span>
+
+finalDf &lt;- newX
+print(finalDf)
+catAndNum &lt;- cbind(finalDf, rMagg$mx)
+print(catAndNum)
+
+write.csv(catAndNum, file = <span class="hljs-string">"dataset_anonimizado_tarea.csv"</span>)
+</div></code></pre>
+
+    </body>
+    </html>
