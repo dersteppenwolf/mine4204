@@ -114,6 +114,40 @@ numDf  <- rankSwap(df2, variables=c( "age" , "absences",
                        "G1","G2", "G3" ),  
                    TopPercent=20, BottomPercent=20, P = 15)
   
-   
-   
+print(numDf)   
 
+numericalOnlyDF <-  numDf[,c("age" , "absences",
+                             "G1","G2", "G3")]
+print(numericalOnlyDF)
+
+rNoise <- addNoise(numericalOnlyDF,method="additive") 
+print(rNoise$xm)
+
+nivelPerdidaNoise <- dUtility(numericalOnlyDF, xm=rNoise$xm, method="IL1")
+print(nivelPerdidaNoise)
+
+
+rMagg <- microaggregation(numericalOnlyDF, method ="mdav",aggr = 3) 
+print(rMagg$mx)
+
+nivelPerdidaNum <- dUtility(numericalOnlyDF, xm=rMagg$xm, method="IL1")
+print(nivelPerdidaNum)
+
+print  (  dRisk(numericalOnlyDF, rMagg$xm)    ) 
+print  (  dRisk(df4, df4Resultadomdav$mx)    ) 
+
+
+
+## archivo final
+# categoricas
+print(newX)
+# numericas
+print(rMagg$mx)
+#print(rMagg)
+
+finalDf <- newX
+print(finalDf)
+catAndNum <- cbind(finalDf, rMagg$mx)
+print(catAndNum)
+
+write.csv(catAndNum, file = "dataset_anonimizado_tarea.csv")
