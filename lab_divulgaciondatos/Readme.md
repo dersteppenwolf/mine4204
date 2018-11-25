@@ -207,15 +207,128 @@ Puesto que ya identificó qué variables son categóricas, puede proceder con
 
 ####    a. ¿Hay observaciones únicas? ¿Cuántas?
 
+Existen 375 observaciones únicas existen en el dataset de un total de 395 registros existentes en el dataset. Dichas observaciones se identificaron porque violan 2-anonymity
+
+```R
+# calcular frecuencias de las tipo category 
+
+ff <- freqCalc(df2, keyVars=c('school', 'sex', 'address', 'famsize', 'Pstatus', 'Mjob', 'Fjob',
+                              'reason', 'guardian', 'schoolsup', 'famsup', 'paid', 'activities',
+                              'nursery', 'higher', 'internet', 'romantic') , w=35) 
+print(cbind(df2,ff$fk,ff$Fk))
+
+print(ff)
+# Salida: 
+# --------------------------
+# 375 obs. violate 2-anonymity 
+# 395 obs. violate 3-anonymity 
+# --------------------------
+```
+
+
 ####    b. ¿El riesgo de re-identificación es muy alto?
+
+El riesgo es muy alto ya que casi el 95% de los registros del dataset son posible identificarlos de forma única a través de la combinación de sus variables categóricas. 
+
+```R
+#calculo del riesgo
+
+rk <- indivRisk(ff)$rk
+print (cbind(df2, ff$fk, ff$Fk, rk ))
+
+```
+
+
 
 ####    c. Copie los comandos ejecutados para cumplir con este punto.
 
 Nota: Puede suponer que se cumple el supuesto de distribución Poisson de fk y Fk, porque los datos fueron especialmente preparados para ello.
 
+Para la selección de las variables a tener en cuenta durante la recodificación se utilizan los atributos 
+_mjob_, _fjob_, _reason_ y _guardian_ debido a que presentan más de dos valores donde uno de ellos tiene una frecuencia muy baja de fácil identificación: 
+
+![](img/mjob.png "")
+![](img/fjob.png "")
+![](img/reason.png "")
+![](img/guardian.png "")
+
+
+
+Comandos para recodificar: 
+
+```R
+#Anonimización variables cartegóricas
+
+#mjob
+df2[,10] <- globalRecode(df2[ ,10] , breaks=c(  -1, 2, 4 ) , labels=c( 1 ,2 ))
+
+#fjob
+df2[,11] <- globalRecode(df2[ ,11] , breaks=c(  -1, 2, 4 ) , labels=c( 1 ,2 ))
+
+#reason
+df2[,12] <- globalRecode(df2[ ,12] , breaks=c(  -1, 1, 3 ) , labels=c( 1 ,2 ))
+
+#guardian
+df2[,13] <- globalRecode(df2[ ,13] , breaks=c(  -1, 0, 2 ) , labels=c( 1 ,2 ))
+
+# calcular frecuencias de las tipo category después de anonimización
+
+ff <- freqCalc(df2, keyVars=c('school', 'sex', 'address', 'famsize', 'Pstatus', 'Mjob', 'Fjob',
+                              'reason', 'guardian', 'schoolsup', 'famsup', 'paid', 'activities',
+                              'nursery', 'higher', 'internet', 'romantic') , w=35) 
+
+print(cbind(df2,ff$fk,ff$Fk))
+
+#calculo del riesgo después de anonimización
+
+rk <- indivRisk(ff)$rk
+print (cbind(df2, ff$fk, ff$Fk, rk ))
+
+
+```
+
+Luego de la recodificación se aplica el proceso de supresión de datos en todas los atributos categóricos para lograr la k anonimity de 2:
+
+```R
+# Local Suppression To Obtain K-Anonymity
+localsupx <- kAnon(df2, keyVars=c('school', 'sex', 'address', 'famsize', 'Pstatus', 'Mjob', 'Fjob',
+                                  'reason', 'guardian', 'schoolsup', 'famsup', 'paid', 'activities',
+                                  'nursery', 'higher', 'internet', 'romantic'), k=2)
+plot(localsupx)
+print(localsupx$xAnon)
+
+newX <- cbind(localsupx$xAnon, df2$w);
+print(newX)
+print ( grep("w", colnames(newX)) )
+newff <- freqCalc(newX, keyVars=c('school', 'sex', 'address', 'famsize', 'Pstatus', 'Mjob', 'Fjob',
+                                  'reason', 'guardian', 'schoolsup', 'famsup', 'paid', 'activities',
+                                  'nursery', 'higher', 'internet', 'romantic') , w=18) 
+print(cbind(newX,newff$fk,newff$Fk))
+
+print(newff)
+#--------------------------
+#0 obs. violate 2-anonymity 
+#161 obs. violate 3-anonymity 
+#--------------------------
+
+newrk <- indivRisk( newff )$rk
+print (cbind(newX, newff$fk , newff$Fk , newrk ))
+print(newrk)
+
+```
+
+Como resultado del proceso se obtiene que ningún registro viola la regla de k anonymity = 2, y que 161 registros violan la k anonymity de 3.
+
+En el siguiente gráfico se encuentran enumeradas la cantidad de supresiones por atributo:
+
+![](img/supr.png "") 
+
+
+
+
 ### Sección 5
 
-5. Es necesario continuar el proceso con las variables numéricas. Considere las posibilidades de añadir ruido, o efectuar rank swapping sobre alguno(s) de ellos. Posteriormente, utilice el procedimiento de microagreagación para perturbar el conjunto de datos. Por último, no olvide evaluar estas transformaciones verificando la pérdida de información y el riesgo de divulgación. Note que estos dos últimos representan un trade-off a nivel del proceso de anonimización, porque el riesgo se disminuye sustancialmente a medida que aumenta el nivel de pérdida de información, pero, como es natural, no es deseable que este nivel crezca exponencialmente; razón por la cual es necesario encontrar un equilibrio entre ambos.
+1. Es necesario continuar el proceso con las variables numéricas. Considere las posibilidades de añadir ruido, o efectuar rank swapping sobre alguno(s) de ellos. Posteriormente, utilice el procedimiento de microagreagación para perturbar el conjunto de datos. Por último, no olvide evaluar estas transformaciones verificando la pérdida de información y el riesgo de divulgación. Note que estos dos últimos representan un trade-off a nivel del proceso de anonimización, porque el riesgo se disminuye sustancialmente a medida que aumenta el nivel de pérdida de información, pero, como es natural, no es deseable que este nivel crezca exponencialmente; razón por la cual es necesario encontrar un equilibrio entre ambos.
 
 
 ####    a. Copie los comandos ejecutados para cumplir con este punto.

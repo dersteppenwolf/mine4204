@@ -24,4 +24,84 @@ ff <- freqCalc(df2, keyVars=c('school', 'sex', 'address', 'famsize', 'Pstatus', 
                               'nursery', 'higher', 'internet', 'romantic') , w=35) 
 print(cbind(df2,ff$fk,ff$Fk))
 
+print(ff)
+#--------------------------
+#375 obs. violate 2-anonymity 
+#395 obs. violate 3-anonymity 
+#--------------------------
+
+
+
+#calculo del riesgo
+
+rk <- indivRisk(ff)$rk
+print (cbind(df2, ff$fk, ff$Fk, rk ))
+
+print (rk)
+
+
+
+#Anonimización variables cartegóricas
+
+#mjob
+df2[,10] <- globalRecode(df2[ ,10] , breaks=c(  -1, 2, 4 ) , labels=c( 1 ,2 ))
+
+#fjob
+df2[,11] <- globalRecode(df2[ ,11] , breaks=c(  -1, 2, 4 ) , labels=c( 1 ,2 ))
+
+#reason
+df2[,12] <- globalRecode(df2[ ,12] , breaks=c(  -1, 1, 3 ) , labels=c( 1 ,2 ))
+
+#guardian
+df2[,13] <- globalRecode(df2[ ,13] , breaks=c(  -1, 0, 2 ) , labels=c( 1 ,2 ))
+
+
+
+# calcular frecuencias de las tipo category después de anonimización
+
+ff <- freqCalc(df2, keyVars=c('school', 'sex', 'address', 'famsize', 'Pstatus', 'Mjob', 'Fjob',
+                              'reason', 'guardian', 'schoolsup', 'famsup', 'paid', 'activities',
+                              'nursery', 'higher', 'internet', 'romantic') , w=35) 
+
+print(cbind(df2,ff$fk,ff$Fk))
+
+#calculo del riesgo después de anonimización
+
+rk <- indivRisk(ff)$rk
+print (cbind(df2, ff$fk, ff$Fk, rk ))
+
+# Local Suppression To Obtain K-Anonymity
+localsupx <- kAnon(df2, keyVars=c('school', 'sex', 'address', 'famsize', 'Pstatus', 'Mjob', 'Fjob',
+                                  'reason', 'guardian', 'schoolsup', 'famsup', 'paid', 'activities',
+                                  'nursery', 'higher', 'internet', 'romantic'), k=2)
+plot(localsupx)
+print(localsupx$xAnon)
+
+newX <- cbind(localsupx$xAnon, df2$w);
+print(newX)
+print ( grep("w", colnames(newX)) )
+newff <- freqCalc(newX, keyVars=c('school', 'sex', 'address', 'famsize', 'Pstatus', 'Mjob', 'Fjob',
+                                  'reason', 'guardian', 'schoolsup', 'famsup', 'paid', 'activities',
+                                  'nursery', 'higher', 'internet', 'romantic') , w=18) 
+print(cbind(newX,newff$fk,newff$Fk))
+
+print(newff)
+#--------------------------
+#0 obs. violate 2-anonymity 
+#161 obs. violate 3-anonymity 
+#--------------------------
+
+newrk <- indivRisk( newff )$rk
+print (cbind(newX, newff$fk , newff$Fk , newrk ))
+print(newrk)
+
+ 
+###########################################
+#Anonimización variables numéricas
+#age
+df2[,4] <- globalRecode(df2[ ,4] , breaks=c(  13, 19 , 21) , labels=c( 1 ,2  ))
+#Medu
+df2[,8] <- globalRecode(df2[ ,8] , breaks=c(  0, 3, 4 ) , labels=c( 1 ,2 ))
+
+
 
